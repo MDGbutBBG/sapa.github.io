@@ -1,4 +1,14 @@
 // --- Enhanced Data (Draft Mode) ---
+
+function formatDate(isoString) {
+    if (!isoString) return "";
+    const date = new Date(isoString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+}
+
 const PARTIES = [
     { 
         id: 'p1', 
@@ -33,20 +43,43 @@ const PARTIES = [
     }
 ];
 
-const POSTS = [
-    { id: 1, partyId: 'p1', type: 'Policy', content: 'test_post_content_1', time: '10 นาทีที่แล้ว', timestamp: 1700000300, hasImage: true },
-    { id: 2, partyId: 'p2', type: 'News', content: 'test_post_content_2', time: '2 ชม. ที่แล้ว', timestamp: 1700000200, hasImage: false },
-    { id: 3, partyId: 'p1', type: 'News', content: 'test_post_content_3', time: '1 วันที่แล้ว', timestamp: 1700000100, hasImage: true },
-    { id: 4, partyId: 'p2', type: 'Policy', content: 'test_post_content_4', time: '2 วันที่แล้ว', timestamp: 1700000000, hasImage: true }
-];
+
+let POSTS = []; 
+
+const url = "https://script.google.com/macros/s/AKfycbzogYPbBbKDyQ0EZhFSoJwFDLY2HnOZIZ3qvXGqNfqviqmP3AkATcL5yDd8Z1vDiaTZ/exec";
+
+
+function fetchPosts() {
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        console.log("Data received:", data);
+        const validData = data.filter(item => item && item.id);
+        POSTS = validData;
+        renderApp();
+    })
+    .catch(error => console.error("Error loading posts:", error));
+}
+
+fetchPosts();
+
+// const POSTS = [
+//     { id: 1, tag: 'p1', content: 'test_post_content_1', Date: 30, hasImage: false },
+//     { id: 2, tag: 'p2', content: 'test_post_content_2', Date: 40, hasImage: false },
+//     { id: 3, tag: 'p1', content: 'test_post_content_3', Date: 50, hasImage: false },
+//     { id: 4, tag: 'p2', content: 'test_post_content_4', Date: 20, hasImage: false }
+// ];
 
 let state = {
     page: 'home',
     selectedParty: null,
     selectedPostId: null, 
     profileTab: 'policies', 
-    sortBy: 'newest'
+    sortBy: 'newest',
+    electionDay: false
 };
+
+
 
 // --- Core Functions ---
 function renderApp() {
@@ -94,9 +127,9 @@ function updateNav() {
     }
 }
 
-function navigateTo(page, partyId = null) {
+function navigateTo(page, tag = null) {
     state.page = page;
-    if (partyId) state.selectedParty = PARTIES.find(p => p.id === partyId);
+    if (tag) state.selectedParty = PARTIES.find(p => p.id === tag);
     state.selectedPostId = null;
     window.scrollTo({ top: 0, behavior: 'smooth' });
     renderApp();
@@ -121,17 +154,17 @@ function renderHome() {
 
     let displayPosts = [...POSTS];
     if (state.sortBy === 'newest') {
-        displayPosts.sort((a, b) => b.timestamp - a.timestamp);
+        displayPosts.sort((a, b) => b.id - a.id);
     } else if (state.sortBy === 'oldest') {
-        displayPosts.sort((a, b) => a.timestamp - b.timestamp);
+        displayPosts.sort((a, b) => a.id - b.id);
     } else if (state.sortBy === 'party') {
-        displayPosts.sort((a, b) => a.partyId.localeCompare(b.partyId));
+        displayPosts.sort((a, b) => a.tag.localeCompare(b.tag));
     }
 
     container.innerHTML = `
         <div class="flex items-center justify-between mb-8">
             <div>
-                <h2 class="text-3xl font-[900] text-blue-950 tracking-tight">Timeline</h2>
+                <h2 class="text-3xl font-[900] text-blue-950 tracking-tight">Dateline</h2>
                 <p class="text-slate-400 font-medium">test_subtitle_text</p>
             </div>
             
@@ -149,7 +182,7 @@ function renderHome() {
 
         <div class="space-y-6">
             ${displayPosts.map(post => {
-                const party = PARTIES.find(p => p.id === post.partyId);
+                const party = PARTIES.find(p => p.id === post.tag);
                 return `
                     <div class="bg-white rounded-[32px] p-5 md:p-6 border border-blue-50 shadow-sm hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-500">
                         <div class="flex items-center justify-between mb-4">
@@ -160,11 +193,10 @@ function renderHome() {
                                 <div>
                                     <h4 class="font-extrabold text-blue-950 text-[15px]">${party.name}</h4>
                                     <div class="flex items-center gap-2 text-slate-400 text-[11px] font-bold">
-                                        <span>${post.time}</span>
+                                        <span>${formatDate(post.date)}</span>
                                     </div>
                                 </div>
                             </div>
-                            <span class="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[10px] font-black uppercase tracking-wider">${post.type}</span>
                         </div>
                         <p class="text-slate-600 leading-relaxed font-medium mb-4">${post.content}</p>
                         
@@ -241,13 +273,12 @@ function renderProfile() {
             `).join('')}
         </div>`;
     } else if (state.profileTab === 'posts') {
-        const partyPosts = POSTS.filter(post => post.partyId === p.id);
+        const partyPosts = POSTS.filter(post => post.tag === p.id);
         tabContent = `<div class="space-y-4">
             ${partyPosts.map(post => `
                 <div onclick="openPostDetail(${post.id})" class="p-4 bg-white rounded-2xl border border-blue-50 hover:border-blue-200 transition-all cursor-pointer group hover:shadow-lg hover:shadow-blue-900/5">
                     <div class="flex justify-between items-center mb-2">
-                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">${post.time}</span>
-                        <span class="text-[10px] font-bold text-blue-600">${post.type}</span>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">${formatDate(post.date)}</span>
                     </div>
                     <p class="text-slate-600 text-sm font-medium line-clamp-2 group-hover:text-blue-950 transition-colors">${post.content}</p>
                     <div class="mt-3 flex items-center gap-1 text-blue-400 text-[10px] font-bold uppercase tracking-wider group-hover:text-blue-600">
@@ -294,7 +325,7 @@ function renderProfile() {
 // New View: Post Detail
 function renderPostDetail() {
     const post = POSTS.find(p => p.id === state.selectedPostId);
-    const party = PARTIES.find(p => p.id === post.partyId);
+    const party = PARTIES.find(p => p.id === post.tag);
 
     const container = document.createElement('div');
     container.className = 'animate-fade-up';
@@ -314,9 +345,7 @@ function renderPostDetail() {
                     <div>
                         <h4 class="font-extrabold text-blue-950 text-lg">${party.name}</h4>
                         <div class="flex items-center gap-3 text-slate-400 text-xs font-bold mt-1">
-                            <span>${post.time}</span>
-                            <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
-                            <span class="text-blue-600 uppercase tracking-wider">${post.type}</span>
+                            <span>${formatDate(post.date)}</span>
                         </div>
                     </div>
                 </div>
@@ -326,12 +355,12 @@ function renderPostDetail() {
                         ${post.content}
                     </p>
                     <p class="text-slate-500 leading-relaxed mb-6">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                        ${post.description}
                     </p>
                     
                     ${post.hasImage ? `
-                    <div class="w-full h-64 bg-sky-50 rounded-3xl flex items-center justify-center text-sky-200 border border-sky-100">
-                        <i data-lucide="image" class="w-12 h-12"></i>
+                    <div class="w-full h-full bg-sky-50 rounded-3xl flex items-center justify-center text-sky-200 border border-sky-100">
+                        <i data-lucide="image" class="w-12 h-12 "></i>
                     </div>
                     ` : ''}
                 </div>
@@ -342,10 +371,11 @@ function renderPostDetail() {
 }
 
 function renderVote() {
+
     const container = document.createElement('div');
     container.className = 'animate-fade-up h-[70vh] flex flex-col items-center justify-center text-center px-6';
     container.innerHTML = `
-        <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-2xl shadow-blue-200 mb-8 animate-bounce">
+        ${!state.electionDay? `<div class="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-2xl shadow-blue-200 mb-8 animate-bounce">
             <i data-lucide="lock" class="w-10 h-10 text-blue-600"></i>
         </div>
         <h2 class="text-2xl font-[900] text-blue-950 mb-4">Election Day</h2>
@@ -353,8 +383,9 @@ function renderVote() {
             <p class="text-slate-500 font-medium leading-relaxed">
                 ท่านจะดูคะแนนได้แบบเรียลไทม์และย้อนหลังได้เมื่อถึงวันเลือกตั้ง
             </p>
-        </div>
+        </div>` : ``}
     `;
+    // container.innerHTML = ``
     return container;
 }
 
