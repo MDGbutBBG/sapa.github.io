@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body class="pb-28">
+    <canvas id="bg-canvas"></canvas>
     <!-- Header -->
     <header
       class="sticky top-0 z-50 glass-header border-b border-blue-100 px-6 py-4 flex items-center justify-between"
@@ -100,11 +101,14 @@
         class="nav-item flex flex-col items-center gap-1 text-slate-300"
       >
         <i data-lucide="vote" class="w-6 h-6"></i>
-        <span class="text-[10px] font-bold uppercase tracking-tighter">Vote</span>
+        <span class="text-[10px] font-bold uppercase tracking-tighter"
+          >Vote</span
+        >
         <div class="nav-indicator"></div>
       </button>
     </nav>
 
     <script src="js/script.js"></script>
+    <script src="js/background.js"></script>
   </body>
 </html>
