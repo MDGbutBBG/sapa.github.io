@@ -201,8 +201,8 @@ function renderHome() {
                         <p class="text-slate-600 leading-relaxed font-medium mb-4">${post.content}</p>
                         
                         ${post.hasImage ? `
-                        <div class="w-full h-56 bg-sky-50 rounded-3xl border border-sky-100 flex items-center justify-center text-sky-200 mb-2">
-                            <img src="https://drive.google.com/thumbnail?id=1MMJBlGDpOH2C4GFVl0MU0PPB3aUT13kB&sz=w500">
+                        <div class="w-full h-full bg-sky-50 rounded-3xl border border-sky-100 flex items-center justify-center overflow-hidden mb-2">
+                            <img src=${post.img} class="w-full h-full object-cover">
                         </div>
                         ` : ''}
                     </div>
@@ -359,8 +359,8 @@ function renderPostDetail() {
                     </p>
                     
                     ${post.hasImage ? `
-                    <div class="w-full h-full bg-sky-50 rounded-3xl flex items-center justify-center text-sky-200 border border-sky-100">
-                        <img data-lucide="image" class="w-12 h-12 "></img>
+                    <div class="w-full h-full bg-sky-50 rounded-3xl border border-sky-100 flex items-center justify-center overflow-hidden mb-2">
+                            <img src=${post.img} class="w-full h-full object-cover">
                     </div>
                     ` : ''}
                 </div>
