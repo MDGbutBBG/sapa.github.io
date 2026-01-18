@@ -202,7 +202,7 @@ function renderHome() {
                         
                         ${post.hasImage ? `
                         <div class="w-full h-56 bg-sky-50 rounded-3xl border border-sky-100 flex items-center justify-center text-sky-200 mb-2">
-                            <i data-lucide="image" class="w-10 h-10"></i>
+                            <img src="https://drive.google.com/thumbnail?id=1MMJBlGDpOH2C4GFVl0MU0PPB3aUT13kB&sz=w500">
                         </div>
                         ` : ''}
                     </div>
@@ -360,7 +360,7 @@ function renderPostDetail() {
                     
                     ${post.hasImage ? `
                     <div class="w-full h-full bg-sky-50 rounded-3xl flex items-center justify-center text-sky-200 border border-sky-100">
-                        <i data-lucide="image" class="w-12 h-12 "></i>
+                        <img data-lucide="image" class="w-12 h-12 "></img>
                     </div>
                     ` : ''}
                 </div>
