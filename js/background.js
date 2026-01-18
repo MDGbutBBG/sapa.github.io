@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
         particleCount: 50,
         connectionDistance: 150,
         mouseDistance: 250,
+        mouseForce: 0.05, // Greatly reduced from ~0.4 for gentler interaction
+        maxSpeed: 3,      // Limit maximum speed
         colors: [
             'rgba(30, 58, 138, ',  // Blue-900
             'rgba(59, 130, 246, ', // Blue-500
@@ -93,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (this.x < 0 || this.x > width) this.vx *= -1;
                 if (this.y < 0 || this.y > height) this.vy *= -1;
 
-                // Mouse repulsion
+                 // Mouse repulsion
                 if (mouse.x != null) {
                     let dx = mouse.x - this.x;
                     let dy = mouse.y - this.y;
@@ -103,12 +105,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         const forceDirectionX = dx / distance;
                         const forceDirectionY = dy / distance;
                         const force = (config.mouseDistance - distance) / config.mouseDistance;
-                        const directionX = forceDirectionX * force * 0.4;
-                        const directionY = forceDirectionY * force * 0.4;
+                        // Use calculated force direction AND config.mouseForce
+                        const directionX = forceDirectionX * force * config.mouseForce;
+                        const directionY = forceDirectionY * force * config.mouseForce;
 
                         this.vx -= directionX;
                         this.vy -= directionY;
                     }
+                }
+
+                // Speed Limiting
+                const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+                if (speed > config.maxSpeed) {
+                    this.vx = (this.vx / speed) * config.maxSpeed;
+                    this.vy = (this.vy / speed) * config.maxSpeed;
                 }
             }
             return true; // Alive
