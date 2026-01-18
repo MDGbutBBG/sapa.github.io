@@ -5,7 +5,7 @@ function formatDate(isoString) {
     const date = new Date(isoString);
     const day = date.getDate();
     const month = date.getMonth() + 1;
-    const year = date.getFullYear();
+    const year = date.getFullYear() + 543;
     return `${day}/${month}/${year}`;
 }
 
@@ -14,7 +14,8 @@ const PARTIES = [
         id: 'p1', 
         name: 'test_party_name_1', 
         shortName: 'PARTY 1', 
-        color: '#1e3a8a', // Navy Blue
+        icon: '#1e3a8a',
+        color: '#1e3a8a',
         bio: 'test_bio_text_description_for_party_1', 
         members: [
             { name: 'test_member_1', role: 'Position A', img: 'M1' },
@@ -30,7 +31,8 @@ const PARTIES = [
         id: 'p2', 
         name: 'test_party_name_2', 
         shortName: 'PARTY 2', 
-        color: '#0284c7', // Sky Blue
+        icon: '#0284c7',
+        color: '#0284c7',
         bio: 'test_bio_text_description_for_party_2', 
         members: [
             { name: 'test_member_4', role: 'Position A', img: 'M4' },
@@ -78,8 +80,6 @@ let state = {
     sortBy: 'newest',
     electionDay: false
 };
-
-
 
 // --- Core Functions ---
 function renderApp() {
@@ -154,9 +154,9 @@ function renderHome() {
 
     let displayPosts = [...POSTS];
     if (state.sortBy === 'newest') {
-        displayPosts.sort((a, b) => b.id - a.id);
+        displayPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
     } else if (state.sortBy === 'oldest') {
-        displayPosts.sort((a, b) => a.id - b.id);
+        displayPosts.sort((a, b) => new Date(a.date) - new Date(b.date));
     } else if (state.sortBy === 'party') {
         displayPosts.sort((a, b) => a.tag.localeCompare(b.tag));
     }
@@ -164,8 +164,8 @@ function renderHome() {
     container.innerHTML = `
         <div class="flex items-center justify-between mb-8">
             <div>
-                <h2 class="text-3xl font-[900] text-blue-950 tracking-tight">Dateline</h2>
-                <p class="text-slate-400 font-medium">test_subtitle_text</p>
+                <h2 class="text-3xl font-[900] text-blue-950 tracking-tight">ประชาสัมพันธ์</h2>
+                <p class="text-slate-400 font-medium">วันที่ ${formatDate(new Date())}</p>
             </div>
             
             <div class="relative">
@@ -187,7 +187,7 @@ function renderHome() {
                     <div class="bg-white rounded-[32px] p-5 md:p-6 border border-blue-50 shadow-sm hover:shadow-xl hover:shadow-blue-900/5 transition-all duration-500">
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('profile', '${party.id}')">
-                                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-black text-sm shadow-lg" style="background: ${party.color}">
+                                <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-white font-black text-sm shadow-lg" style="background: ${party.icon}">
                                     ${party.shortName[0]}
                                 </div>
                                 <div>
@@ -218,13 +218,13 @@ function renderParties() {
     container.className = 'animate-fade-up';
     container.innerHTML = `
         <div class="mb-8">
-            <h2 class="text-3xl font-[900] text-blue-950 tracking-tight">Candidates</h2>
-            <p class="text-slate-400 font-medium">test_subtitle_text</p>
+            <h2 class="text-3xl font-[900] text-blue-950 tracking-tight">พรรค</h2>
+            <p class="text-slate-400 font-medium">วันที่ ${formatDate(new Date())}</p>
         </div>
         <div class="grid gap-4 md:gap-5">
             ${PARTIES.map(p => `
                 <div onclick="navigateTo('profile', '${p.id}')" class="group relative bg-white p-4 md:p-6 rounded-[32px] border border-blue-50 flex items-center gap-3 md:gap-5 cursor-pointer hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-500">
-                    <div class="w-16 h-16 md:w-20 md:h-20 rounded-[24px] flex items-center justify-center text-white font-black text-xl md:text-2xl shadow-xl transition-transform group-hover:scale-105 flex-shrink-0" style="background: ${p.color}">
+                    <div class="w-16 h-16 md:w-20 md:h-20 rounded-[24px] flex items-center justify-center text-white font-black text-xl md:text-2xl shadow-xl transition-transform group-hover:scale-105 flex-shrink-0" style="background: ${p.icon}">
                         ${p.shortName[0]}
                     </div>
                     <div class="flex-1 min-w-0">
@@ -291,14 +291,14 @@ function renderProfile() {
 
     container.innerHTML = `
         <button onclick="navigateTo('parties')" class="mb-6 flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest hover:text-blue-900 transition-colors group">
-            <i data-lucide="chevron-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i> Back
+            <i data-lucide="chevron-left" class="w-4 h-4 group-hover:-translate-x-1 transition-transform"></i> กลับ
         </button>
 
         <div class="relative bg-white rounded-[40px] p-6 md:p-8 border border-blue-50 shadow-2xl shadow-blue-900/5 mb-8 overflow-hidden text-center">
-            <div class="absolute top-0 left-0 w-full h-24 opacity-10" style="background: ${p.color}"></div>
+            <div class="absolute top-0 left-0 w-full h-24 opacity-10" style="background: ${p.icon}"></div>
             <div class="relative z-10">
-                <div class="w-28 h-28 mx-auto bg-white rounded-[32px] flex items-center justify-center shadow-2xl mb-6 transform -rotate-3" style="color: ${p.color}; border: 8px solid white;">
-                    <div class="w-full h-full rounded-[24px] flex items-center justify-center text-white font-black text-4xl" style="background: ${p.color}">
+                <div class="w-28 h-28 mx-auto bg-white rounded-[32px] flex items-center justify-center shadow-2xl mb-6 transform -rotate-3" style="color: ${p.icon}; border: 8px solid white;">
+                    <div class="w-full h-full rounded-[24px] flex items-center justify-center text-white font-black text-4xl" style="background: ${p.icon}">
                         ${p.shortName[0]}
                     </div>
                 </div>
@@ -339,7 +339,7 @@ function renderPostDetail() {
 
             <div class="relative z-10">
                 <div class="flex items-center gap-4 mb-8">
-                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-black text-lg shadow-lg" style="background: ${party.color}">
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-black text-lg shadow-lg" style="background: ${party.icon}">
                         ${party.shortName[0]}
                     </div>
                     <div>
