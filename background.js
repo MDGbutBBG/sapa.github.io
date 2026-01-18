@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mouse interaction
     window.addEventListener('mousemove', (e) => {
-        mouse.x = e.x;
-        mouse.y = e.y;
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
     });
 
     window.addEventListener('mouseout', () => {
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('click', (e) => {
         const explosionCount = 15;
         for (let i = 0; i < explosionCount; i++) {
-            particles.push(new Particle(e.x, e.y, true));
+            particles.push(new Particle(e.clientX, e.clientY, true));
         }
     });
 
