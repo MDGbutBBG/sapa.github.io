@@ -14,7 +14,7 @@ export default function Footer() {
                 </div>
                 <hr className="w-100 h-0.5 text-slate-400 mb-6"/>
                 <p className="text-[10px] font-light text-slate-400 tracking-widest uppercase">
-                    © 2024 คณะกรรมการสภานักเรียนโรงเรียนนารีรัตน์จังหวัดเเพร่. All rights reserved.
+                    © 2026 คณะกรรมการสภานักเรียนโรงเรียนนารีรัตน์จังหวัดเเพร่. All rights reserved.
                 </p>
             </footer>
         </div>
