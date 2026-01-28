@@ -1,9 +1,8 @@
 import { FaFacebook,FaInstagram } from "react-icons/fa";
-import { Mail } from "lucide-react";
 
 export default function Footer() {
     return (
-        <>  
+        <div className="">  
             <footer className="bg-white-800 border-t border-blue-100 text-white py-12 px-6 flex flex-col items-center">
                 <h2 className="text-m font-semibold text-blue-950 mb-2">
                     คณะกรรมการสภานักเรียนโรงเรียนนารีรัตน์จังหวัดเเพร่
@@ -18,6 +17,6 @@ export default function Footer() {
                     © 2024 คณะกรรมการสภานักเรียนโรงเรียนนารีรัตน์จังหวัดเเพร่. All rights reserved.
                 </p>
             </footer>
-        </>
+        </div>
     )
 }
