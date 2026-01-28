@@ -6,6 +6,9 @@ import Vote from "./components/Vote";
 import Navbar from "./components/Navbar";
 import Parties from "./components/Parties";
 import Header from "./components/Header";
+import PartyHome from "./components/party/PartyHome.jsx";
+import PartyCreatePosts from "./components/party/PartyCreatePosts.jsx";
+import PartyPosts from "./components/party/PartyPosts.jsx";
 import {Login,PartyLogin} from "./components/Login";
 import Footer from "./components/Footer.jsx";
 import { AuthProvider } from "./components/Context.jsx";
@@ -24,6 +27,7 @@ export default function App() {
   const [selectedPostId, setSelectedPostId] = useState(null);
   const [profileTab, setProfileTab] = useState("policies");
   const [sortBy, setSortBy] = useState("newest");
+  const [isParty, setIsParty] = useState(false);
 
   // useEffect(() => {
   //   fetch(API_URL)
@@ -39,8 +43,9 @@ export default function App() {
     if (party) setSelectedParty(party);
   }
 
-  function openPost(id) {
+  function openPost(id, isParty = false) {
     setSelectedPostId(id);
+    if (isParty) setIsParty(true);
     setPage("post");
   }
 
@@ -73,20 +78,26 @@ export default function App() {
         parties={PARTIES}
       />;
 
-    if (page === "post") return <PostDetail navigateTo={navigateTo} postId={selectedPostId} />;
+    if (page === "post") return <PostDetail navigateTo={navigateTo} postId={selectedPostId} isParty={isParty} />;
     
     if (page === "vote") return <Vote />;
 
     if (page === "login") return <Login navigateTo={navigateTo} forParty={forParty} />;
 
-    if (page === "partyLogin") return <PartyLogin />;
+    if (page === "partyLogin") return <PartyLogin navigateTo={navigateTo} />;
+
+    if (page === "partyHome") return <PartyHome party={selectedParty} PARTIES={PARTIES} navigateTo={navigateTo} setSelectedParty={setSelectedParty}/>;
+
+    if (page === "partyCreatePosts") return <PartyCreatePosts party={selectedParty} PARTIES={PARTIES} navigateTo={navigateTo} />;
+
+    if (page === "partyPosts") return <PartyPosts party={selectedParty} PARTIES={PARTIES} navigateTo={navigateTo} openPost={openPost} />;
   }
     
   
   return (
     <AuthProvider>
       <div>
-        {page === 'partyLogin' ? (
+        { page === 'partyHome' || page === 'partyLogin' || page === 'partyCreatePosts' || page === 'partyPosts' || (page === 'post' && isParty) ? (
           <div className="relative min-h-screen bg-[#f0f9ff]">
           {renderPage()}
           </div>

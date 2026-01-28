@@ -24,4 +24,13 @@ export const PARTIES = [
     members: [{ name: "test_member_3", role: "Position A", img: "M3" }],
     policies: [{ title: "policy 3", desc: "policy desc 3" }],
   },
+  {
+    id: "p3",
+    name: "test_party_name_3",
+    shortName: "พรรคหมายเลข 3",
+    icon: "#097969",
+    bio: "test_bio_text_description_for_party_2",
+    members: [{ name: "test_member_3", role: "Position A", img: "M3" }],
+    policies: [{ title: "policy 3", desc: "policy desc 3" }],
+  }
 ];

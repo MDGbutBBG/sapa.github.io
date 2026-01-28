@@ -45,7 +45,7 @@ export default function Profile({
       <button onClick={() => navigateTo("parties")} className="hover:cursor-pointer mb-6 flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest hover:text-blue-900 transition-colors group">
         <MoveLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform " /> กลับ
       </button>
-
+      
       <div className="relative bg-white rounded-[40px] p-6 md:p-8 border border-blue-50 shadow-2xl shadow-blue-900/5 mb-8 overflow-hidden text-center">
         <div className="absolute top-0 left-0 w-full h-24 opacity-10" style={{background : party.icon}}></div>
         <div className="relative z-10">
