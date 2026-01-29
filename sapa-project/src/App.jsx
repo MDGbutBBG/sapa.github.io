@@ -39,12 +39,14 @@ export default function App() {
   // console.log("Hello World")
 
   function navigateTo(target, party = null) {
+    window.scrollTo(0, 0);
     setPage(target);
     if (party) setSelectedParty(party);
   }
 
   function openPost(id, isParty = false) {
     setSelectedPostId(id);
+    window.scrollTo(0, 0);
     if (isParty) setIsParty(true);
     setPage("post");
   }
@@ -86,7 +88,7 @@ export default function App() {
 
     if (page === "partyLogin") return <PartyLogin navigateTo={navigateTo} />;
 
-    if (page === "partyHome") return <PartyHome party={selectedParty} PARTIES={PARTIES} navigateTo={navigateTo} setSelectedParty={setSelectedParty}/>;
+    if (page === "partyHome") return <PartyHome party={selectedParty} PARTIES={PARTIES} navigateTo={navigateTo} setIsParty={setIsParty}/>;
 
     if (page === "partyCreatePosts") return <PartyCreatePosts party={selectedParty} PARTIES={PARTIES} navigateTo={navigateTo} />;
 

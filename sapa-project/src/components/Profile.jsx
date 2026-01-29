@@ -49,9 +49,9 @@ export default function Profile({
       <div className="relative bg-white rounded-[40px] p-6 md:p-8 border border-blue-50 shadow-2xl shadow-blue-900/5 mb-8 overflow-hidden text-center">
         <div className="absolute top-0 left-0 w-full h-24 opacity-10" style={{background : party.icon}}></div>
         <div className="relative z-10">
-          <div className="w-28 h-28 mx-auto bg-white rounded-2xl flex items-center justify-center shadow-2xl mb-6 transform -rotate-3" style={{ color: party.icon, border: '8px solid '}}>
-              <div className="w-full h-full rounded-24px flex items-center justify-center text-white font-black text-4xl" style={{background: party.icon}}>
-                  {party.shortName[0]}
+          <div className="w-28 h-28 mx-auto bg-white rounded-2xl flex items-center justify-center shadow-2xl mb-6 transform -rotate-3 overflow-hidden" style={{ color: party.icon, border: '8px solid '}}>
+              <div className="w-full h-full flex items-center justify-center text-white font-black text-4xl " style={{background: party.icon}}>
+                  {party.img ? <img src={party.img} alt="Party Logo" className="w-full h-full object-cover"/> : party.shortName[0]}
               </div>
           </div>
           <h2 className="text-2xl font-black mt-4">{party.name}</h2>
@@ -92,7 +92,7 @@ export default function Profile({
             {party.members.map((m, i) => (
               <div key={i} className="animate-fade-up p-4 rounded">
                 <div className="bg-white p-5 rounded-3xl border border-blue-50 text-center">
-                      <div className="w-16 h-16 mx-auto bg-slate-50 rounded-2xl flex items-center justify-center text-slate-300 font-bold mb-3 border border-slate-100">
+                      <div className="w-40 h-30 mx-auto bg-slate-50 rounded-2xl flex items-center justify-center text-slate-300 font-bold mb-3 border border-slate-100">
                           {m.img}
                       </div>
                       <h6 className="font-extrabold text-blue-950 text-sm mb-0.5">{m.name}</h6>

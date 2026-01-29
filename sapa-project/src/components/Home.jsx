@@ -63,6 +63,7 @@ export default function Home({
     }, (error) => {
       console.error("Error fetching posts: ", error);
     });
+    
     return () => {
       unsubscribe();
     }}, [sortBy]);

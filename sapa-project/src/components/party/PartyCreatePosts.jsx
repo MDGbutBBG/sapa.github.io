@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState,useEffect, cache } from "react";
 import Swal from "sweetalert2";
 import { serverTimestamp } from "firebase/firestore";
 import { db,storage } from "../../data/firebase";
@@ -42,8 +42,13 @@ export default function PartyCreatePosts({party,PARTIES,navigateTo}) {
                     setIsUploading(false);
                     return;
                 }
+                const metaData = {
+                    cacheControl: 'public, max-age=86400',
+                    contentType: img.type,
+                };
+
                 const storageRef = ref(storage, `partyPosts/${img.name}`);
-                const snapshot = await uploadBytes(storageRef, img);
+                const snapshot = await uploadBytes(storageRef, img, metaData);
                 imgURL = await getDownloadURL(snapshot.ref);
             }
         } catch (error) {

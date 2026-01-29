@@ -19,6 +19,19 @@ export async function commentPost(postID,navigateTo,user,content) {
     }
 };
 
-export async function partyCommentsPost(postID) {
+export async function partyCommentsPost(postID,party,content) {
     if (!postID) return [];
+    try {
+        const commentsRef = collection(db, "posts", postID, "comments");
+        await addDoc(commentsRef, {
+            userID: party.id,
+            userName: party.name,
+            userImg: party.img,
+            content: content,
+            tag: 'party',
+            timestamp: serverTimestamp()
+        });
+    } catch (error) {
+        console.error("Error adding party comment:", error);
+    }
 };

@@ -2,7 +2,7 @@ import { useState,useEffect } from "react";
 import { db } from "../../data/firebase";
 import { collection, query, where, orderBy, getDocs, limit } from "firebase/firestore";
 
-export default function PartyHome({party,PARTIES,navigateTo,setSelectedParty}) {
+export default function PartyHome({party,PARTIES,navigateTo,setIsParty}) {
   const currentParty = PARTIES.find(p => p.id === party.UID);
 
   return (
@@ -16,7 +16,7 @@ export default function PartyHome({party,PARTIES,navigateTo,setSelectedParty}) {
           <button onClick={() => navigateTo('partyPosts', party)} className="transition w-full mt-4 bg-cyan-500 hover:bg-cyan-700 cursor-pointer text-white font-bold py-2 px-4 rounded">
             โพสต์ทั้งหมด
           </button>
-          <button onClick={() => { localStorage.removeItem('isPartyLoggedIn'); localStorage.removeItem('partyData'); setSelectedParty(null); navigateTo('home')}} className="transition mt-4 bg-red-800 hover:bg-red-700 cursor-pointer text-white font-bold py-2 px-4 rounded">
+          <button onClick={() => { localStorage.removeItem('isPartyLoggedIn'); localStorage.removeItem('partyData'); setIsParty(false); navigateTo('home')}} className="transition mt-4 bg-red-800 hover:bg-red-700 cursor-pointer text-white font-bold py-2 px-4 rounded">
             ออกจากระบบ
           </button>
         </div>

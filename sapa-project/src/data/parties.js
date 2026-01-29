@@ -1,9 +1,9 @@
 export const PARTIES = [
   {
     id: "p1",
-    name: "test_party_name_1",
+    name: "พรรคประชานารี",
     shortName: "พรรคหมายเลข 1",
-    icon: "#1e3a8a",
+    icon: "#FF00FF",
     bio: "test_bio_text_description_for_party_1",
     members: [
       { name: "test_member_1", role: "Position A", img: "M1" },
@@ -17,20 +17,36 @@ export const PARTIES = [
   },
   {
     id: "p2",
-    name: "test_party_name_2",
+    name: "Gorgeous radiant Nareerat",
     shortName: "พรรคหมายเลข 2",
-    icon: "#0284c7",
+    icon: "#FF6400",
     bio: "test_bio_text_description_for_party_2",
     members: [{ name: "test_member_3", role: "Position A", img: "M3" }],
     policies: [{ title: "policy 3", desc: "policy desc 3" }],
   },
   {
     id: "p3",
-    name: "test_party_name_3",
+    name: "NR NEXT GEN",
+    img: "/img/NEXTGENLogo.png",
     shortName: "พรรคหมายเลข 3",
     icon: "#097969",
-    bio: "test_bio_text_description_for_party_2",
-    members: [{ name: "test_member_3", role: "Position A", img: "M3" }],
+    bio: "ผุ้ลงสมัคร คณะกรรมการนักเรียน โรงเรียนนารีรัตน์จังหวัดแพร่ เบอร์ 3",
+    members: [{ name: "น.ส. ชนัญชิดา ยานะวิน", role: "ประธานพรรค", img: "M3" },
+              { name: "นาย ชยุตพงศ์ ดีคำ", role: "สมาชิกพรรค", img: "M3" },
+              { name: "น.ส. ณฤดี ศรีเจริญภาภร", role: "สมาชิกพรรค", img: "M3" },
+              { name: "น.ส.รอยพิมพ์ เวียงอินทร์", role: "สมาชิกพรรค", img: "M3" },
+              { name: "นาย จิตตพัฒน์ ปรีดา", role: "สมาชิกพรรค", img: "M3" },
+              { name: "น.ส. ชนาภัทร ม้าทอง", role: "สมาชิกพรรค", img: "M3" },
+              { name: "น.ส. วีธรา ครองสุข", role: "สมาชิกพรรค", img: "M3" },
+              { name: "น.ส.ฐิดาภา เชี่ยวพานิชย์", role: "สมาชิกพรรค", img: "M3" },
+              { name: "น.ส.พิชชากร กลมกล่อม", role: "สมาชิกพรรค", img: "M3" },
+              { name: "นาย ปรเมษฐ สุดเสน่ห์", role: "สมาชิกพรรค", img: "M3" },
+              { name: "นาย วรพิชญ์ ข่มอาวุธ", role: "สมาชิกพรรค", img: "M3" },
+              { name: "นาย ณภัทร์ วังแสน", role: "สมาชิกพรรค", img: "M3" },
+              { name: "นาย สรรเพชร มณีงาม", role: "สมาชิกพรรค", img: "M3" },
+              { name: "นาย เสกสรรค์ พุ่มภัทรมงคล", role: "สมาชิกพรรค", img: "M3" },
+              { name: "น.ส.อนัญญา ภิญโญ", role: "สมาชิกพรรค", img: "M3" }
+    ],
     policies: [{ title: "policy 3", desc: "policy desc 3" }],
   }
 ];
