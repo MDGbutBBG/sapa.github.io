@@ -42,9 +42,10 @@ export default function Profile({
 
   return (
     <div className='animate-fade-up pb-28 min-h-screen relative max-w-xl mx-auto px-6 pt-8 space-y-4'>
-      <button onClick={() => navigateTo("parties")} className="hover:cursor-pointer mb-6 flex items-center gap-2 text-slate-400 text-xs font-bold uppercase tracking-widest hover:text-blue-900 transition-colors group">
-        <MoveLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform " /> กลับ
-      </button>
+        <button onClick={() => navigateTo("parties")} className="flex felx-row gap-1 group appearance-none bg-white border border-blue-100 text-blue-900 py-2 pl-4 pr-10 rounded-xl text-xs font-bold uppercase tracking-wider focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm hover:cursor-pointer">
+          <MoveLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform " /> กลับ
+        </button>
+        
       
       <div className="relative bg-white rounded-[40px] p-6 md:p-8 border border-blue-50 shadow-2xl shadow-blue-900/5 mb-8 overflow-hidden text-center">
         <div className="absolute top-0 left-0 w-full h-24 opacity-10" style={{background : party.icon}}></div>

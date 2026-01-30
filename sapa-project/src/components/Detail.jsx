@@ -142,8 +142,8 @@ export default function PostDetail({ navigateTo,postId,isParty = false}) {
 
   return (
     <div className="max-w-xl mx-auto px-6 pt-8 space-y-4">
-      <button onClick={() => (isParty === false) ? navigateTo("profile", party) : navigateTo("partyPosts")} className="group appearance-none bg-white border border-blue-100 text-blue-900 py-2 pl-4 pr-10 rounded-xl text-xs font-bold uppercase tracking-wider focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm hover:cursor-pointer">
-        <MoveLeft className="w-4 h-4 inline-block mr-2 group-hover:-translate-x-1 transition-transform" />  
+      <button onClick={() => (isParty === false) ? navigateTo("profile", party) : navigateTo("partyPosts")} className="flex felx-row gap-1 group appearance-none bg-white border border-blue-100 text-blue-900 py-2 pl-4 pr-10 rounded-xl text-xs font-bold uppercase tracking-wider focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm hover:cursor-pointer">
+        <MoveLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />  
         กลับ
       </button>
 
