@@ -14,8 +14,8 @@ export default function Parties({
             <div className="relative md:grid flex flex-col gap-4 md:gap-5">
                 {parties.map((party) => (
                     <div key={party.id} className="group relative rounded-xl bg-white p-4 md:p-6 rounded-32px border-blue-50 flex items-center gap-3 md:gap-5 cursor-pointer hover:border-blue-200 hover:shadow-2xl hover:shadow-blue-900/5 transition-all duration-500 " onClick={() => navigateTo('profile', party)}>
-                        <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl flex items-center justify-center text-white font-black text-xl md:text-2xl shadow-xl transition-transform group-hover:scale-105 shrink-0" style={{background : party.icon}}>
-                            {party.shortName[0]}
+                        <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl flex items-center justify-center text-white font-black text-xl md:text-2xl shadow-xl transition-transform group-hover:scale-105 shrink-0 overflow-hidden" style={{color : party.icon, border: '8px solid ' }}>
+                            <img src={party.img} className="w-full h-full object-cover"/>
                         </div>
                         <div className="flex-1 min-w-0">
                             <h3 className="font-extrabold text-blue-950 text-base md:text-lg mb-0.5 md:mb-1 truncate">{party.name}</h3>

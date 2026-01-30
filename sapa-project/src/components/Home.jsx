@@ -134,10 +134,10 @@ export default function Home({
                 onClick={() => navigateTo('profile', party)}
               >
                 <div
-                  className="w-12 h-12 rounded-2xl text-white flex items-center justify-center font-black shadow-sm"
-                  style={{ background: party.icon || '#ccc' }}
+                  className="w-12 h-12 rounded-2xl text-white flex items-center justify-center font-black shadow-sm overflow-hidden"
+                  style={{ color: party.icon ,border: '4px solid '}}
                 >
-                  {party.shortName ? party.shortName[0] : "?"}
+                  <img src={party.img} className="w-full h-full object-cover"/>
                 </div>
                     <div>
                         <h4 className="font-bold text-gray-800">{party.name}</h4>
