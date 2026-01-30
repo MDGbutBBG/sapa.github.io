@@ -1,10 +1,13 @@
+* {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: "Plus Jakarta Sans", "Noto Sans Thai", sans-serif;
   /* background-color moved to #bg-canvas */
   -webkit-tap-highlight-color: transparent;
-  overflow-x: hidden;
   color: #0f172a; /* slate-900 */
 }
 

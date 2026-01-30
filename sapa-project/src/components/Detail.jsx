@@ -147,7 +147,7 @@ export default function PostDetail({ navigateTo,postId,isParty = false}) {
         กลับ
       </button>
 
-      <div className="animate-fade-up bg-white p-7 rounded-3xl shadow-xl"> 
+      <div className="animate-fade-up bg-white p-7 rounded-3xl shadow-md"> 
         <p className="text-slate-400 text-sm ">{formatDate(post.date?.toDate ? post.date.toDate() : post.date)}</p>
         <div className="pt-2 flex flex-2">
           <div className="w-10 h-10 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-900 relative overflow-hidden">
@@ -167,7 +167,7 @@ export default function PostDetail({ navigateTo,postId,isParty = false}) {
       </div>
 
       {/* Comments add */}
-      <div className="animate-fade-up bg-white p-5 rounded-3xl shadow-xl">
+      <div className="animate-fade-up bg-white p-5 rounded-3xl shadow-md">
         <MessageCircleQuestion className="w-10 h-10 mb-2"/>
         <h3 className="font-black text-xl">ความคิดเห็น</h3>
         <p className="text-slate-400 text-sm">กรุณาเเสดงความคิดเห็นอย่างส้รางสรรค์...</p>
@@ -183,17 +183,17 @@ export default function PostDetail({ navigateTo,postId,isParty = false}) {
               return (
                 comment.tag === 'user' ? (
                   <div className="animate-fade-up bg-white p-5 rounded-3xl shadow-xl" key={comment.id}>
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-300 font-bold">
-                      <img src={comment.userImg} alt="User Avatar" className="w-full h-full object-cover rounded-full"/>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-300 font-bold">
+                        <img src={comment.userImg} alt="User Avatar" className="w-full h-full object-cover rounded-full"/>
+                      </div>
+                      <span className="font-medium">{comment.userName}</span>
                     </div>
-                    <span className="font-medium">{comment.userName}</span>
-                  </div>
-                  <p className="text-gray-600 leading-relaxed">{comment.content}</p>
-                  <p className="text-slate-400 text-sm mt-2">{formatDate(comment.timestamp?.toDate ? comment.timestamp.toDate() : comment.timestamp)}</p>
+                    <p className="text-gray-600 leading-relaxed">{comment.content}</p>
+                    <p className="text-slate-400 text-sm mt-2">{formatDate(comment.timestamp?.toDate ? comment.timestamp.toDate() : comment.timestamp)}</p>
                   </div>
                 ) : (
-                  <div className="animate-fade-up bg-white p-5 rounded-3xl shadow-xl" key={comment.id}>
+                  <div className="animate-fade-up bg-white m-0.5 p-5 rounded-3xl shadow-md" key={comment.id}>
                     <div className="flex items-center gap-3 mb-3">
                       <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-right text-slate-300 font-bold ">
                         <img src={comment.userImg} alt="User Avatar" className="w-full h-full object-cover rounded-full"/>

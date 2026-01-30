@@ -3,7 +3,6 @@ import { PARTIES } from "../data/parties";
 import { formatDate } from "../utils/formatDate";
 import { Heart,MessageCircleQuestion } from "lucide-react";
 import { useAuth } from "./Context";
-import { getUserData } from "../data/getuserData";
 import { getLikePosts } from "../data/getLikePosts";
 import { collection, query, orderBy, getDocs, onSnapshot, limit } from "firebase/firestore";
 import { db } from "../data/firebase";

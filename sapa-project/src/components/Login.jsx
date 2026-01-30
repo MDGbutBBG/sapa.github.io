@@ -71,9 +71,9 @@ export function Login({navigateTo, setForParty}) {
                     </button>)}
                 </div>
             ) : (
-                <div className="flex flex-col items-center justify-center">
-                    <h2 className="">เข้าสู่ระบบด้วย Google หรือ เข้าสู่ระบบสำหรับพรรคการเลือกตั้ง</h2>
-                    <div className="flex flex-row gap-10 items-center justify-center">
+                <div>
+                    <h2>เข้าสู่ระบบด้วย Google หรือ เข้าสู่ระบบสำหรับพรรคการเลือกตั้ง</h2>
+                    <div className="flex flex-col md:flex-row md:gap-2 items-center justify-center">
                         <button onClick={handleGoogleSignIn} className="mt-4 bg-indigo-950 text-white px-4 py-2 rounded-md flex items-center hover:cursor-pointer hover:bg-indigo-900 transition">
                             <FaGoogle className="mr-2" /> Login with Google
                         </button>
@@ -82,6 +82,7 @@ export function Login({navigateTo, setForParty}) {
                         </button>
                     </div>
                 </div>
+                
             )}
             <button onClick={() => navigateTo('home')} className="mt-4 bg-indigo-800 text-white px-4 py-2 rounded-md flex items-center hover:cursor-pointer hover:bg-indigo-700 transition">
                 <IoLogIn className="mr-2" /> กลับไปหน้าหลัก
