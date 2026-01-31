@@ -104,7 +104,7 @@ export default function Home({
 
 
   return (
-    <div className="animate-fade-up pb-28 min-h-screen relative">
+    <div className="animate-fade-up pb-28 min-h-screen relativet t-0">
       <canvas id="bg-canvas"></canvas>
 
       {/* --- Main Content --- */}
@@ -127,7 +127,7 @@ export default function Home({
           return (
             <div
               key={post.id}
-              className="animate-fade-up bg-white p-5 rounded-3xl shadow transition-all hover:shadow-md"
+              className="animate-fade-up bg-white p-5 rounded-3xl shadow-2xs transition-all hover:shadow-md"
             >
               <div
                 className="flex gap-3 cursor-pointer"

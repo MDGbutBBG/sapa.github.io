@@ -2,7 +2,7 @@ import { FaFacebook,FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
     return (
-        <div className="content-center text-center">  
+        <div className="content-center text-center ">  
             <footer className="bg-white-800 border-t border-blue-100 text-white py-12 px-6 flex flex-col items-center">
                 <h2 className="md:text-m text-[14px] font-semibold text-blue-950 mb-2">
                     คณะกรรมการสภานักเรียนโรงเรียนนารีรัตน์จังหวัดเเพร่
