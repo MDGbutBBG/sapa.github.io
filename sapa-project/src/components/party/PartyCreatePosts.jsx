@@ -93,7 +93,7 @@ export default function PartyCreatePosts({party,PARTIES,navigateTo}) {
         }
     }
     return (
-        <div className="animate-fade-up h-[70vh] flex flex-col items-center justify-center text-center px-6">
+        <div className="animate-fade-up h-[70vh] flex  flex-row md:flex-col items-center justify-center text-left px-6">
             <div className="w-175 bg-white p-5 rounded-3xl shadow-xl">
                 {/* <h1>ยินดีต้อนรับสู่หน้าสร้างโพสต์สำหรับพรรค {currentParty.name}</h1> */}
                 <h2 className="text-left text-2xl font-black">สร้างโพสต์ใหม่</h2>
@@ -114,7 +114,7 @@ export default function PartyCreatePosts({party,PARTIES,navigateTo}) {
                         type="text"
                         className="w-full p-3 border border-blue-200 rounded-lg h-40 resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
                     ></textarea>
-                    <div className="mt-4 flex items-center">
+                    <div className="mt-4 flex flex-col ">
                         <label className="mr-4 items-left">
                             <input 
                                 type="checkbox"
@@ -128,7 +128,7 @@ export default function PartyCreatePosts({party,PARTIES,navigateTo}) {
                             <input 
                                 type="file"
                                 onChange={(e) => setImg(e.target.files[0])}
-                                className="border border-blue-200 rounded-lg p-2"
+                                className="w-full border border-blue-200 rounded-lg p-2"
                             />
                         )}
                     </div>
