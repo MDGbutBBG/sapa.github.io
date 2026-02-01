@@ -79,26 +79,37 @@ export default function Profile({
           {party.policies.map((p, i) => (
               <div key={i} className=" p-5 bg-white rounded-3xl border border-blue-50 shadow-sm">
                 <div>
-                  <CircleCheckIcon className="w-5 h-5"/>
+                  <CircleCheckIcon className="w-7 h-7"/>
                 </div>
-                <h4 className="font-extrabold text-blue-950 mb-1">{p.title}</h4>
-                <p className="text-slate-500 text-sm font-medium leading-relaxed">{p.desc}</p>
+                <h4 className="pt-2 font-extrabold text-blue-950 mb-1 text-xl">{p.title}</h4>
+                <p className="text-slate-500 text-[16px] font-medium  leading-relaxed">{p.desc}</p>
               </div>
           ))}
         </div>
         }
 
         {profileTab === "members" &&
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-2 gap-4">
             {party.members.map((m, i) => (
-              <div key={i} className="animate-fade-up p-4 rounded">
-                <div className="bg-white p-5 rounded-3xl border border-blue-50 text-center">
-                      <div className="w-40 h-30 mx-auto bg-slate-50 rounded-2xl flex items-center justify-center text-slate-300 font-bold mb-3 border border-slate-100">
-                          {m.img}
-                      </div>
-                      <h6 className="font-extrabold text-blue-950 text-sm mb-0.5">{m.name}</h6>
-                      <p className="text-blue-600 text-[10px] font-black uppercase tracking-wider">{m.role}</p>
+              <div key={i} className="animate-fade-up md:p-5 rounded">
+                {m.role === 'ADMIN' ? (
+                  <div className="bg-red-200 p-5 rounded-3xl border-2 border-red-950 text-center">
+                    <div className="w-auto h-auto md:w-40 mx-auto bg-red-50 rounded-2xl flex items-center justify-center text-red-300 font-bold mb-3 border border-red-700 overflow-hidden">
+                        <img src={m.img} alt="" className="" />
+                    </div>
+                    <h6 className="font-extrabold text-red-950 text-sm mb-0.5">{m.name}</h6>
+                    <p className="text-red-600 text-[10px] font-black uppercase tracking-wider">สมาชิกพรรค,{m.role}</p>
                   </div>
+                ) : (
+                  <div className="bg-white p-5 rounded-3xl border border-blue-50 text-center">
+                    <div className="w-auto h-auto md:w-40 mx-auto bg-slate-50 rounded-2xl flex items-center justify-center text-slate-300 font-bold mb-3 border border-slate-100 overflow-hidden">
+                        <img src={m.img} alt="" className="" />
+                    </div>
+                    <h6 className="font-extrabold text-blue-950 text-sm mb-0.5">{m.name}</h6>
+                    <p className="text-blue-600 text-[10px] font-black uppercase tracking-wider">{m.role}</p>
+                  </div>
+                )}
+                
               </div>
             ))}
           </div>
